@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+    <div class="container">
+
+        <!-- main card for search student -->
+        <div class="card mainCard m-5 col-8 mx-auto">
+
+            <!-- card heading -->
+            <div class="card-header mainHeader text-white text-center rounded m-3 p-2 lead bg-dark">
+                <i class="fa fa-search"></i> Search For a Course
+            </div>
+
+            <div class="card-body">
+
+                <label for="courseName" class="lead">&nbsp;Type The Course Name</label>
+                <input type="text" id="courseName" placeholder="Course Name" class="form-control">
+
+            </div>
+
+        </div>
+
+        <!-- courses inserted by js -->
+        <div id="courses"></div>
+
+    </div>
+
+    <!-- page specific js -->
+    <script src="js/searchCourse.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

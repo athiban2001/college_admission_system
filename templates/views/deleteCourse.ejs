@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+    <div class="container">
+
+        <!-- checking for getting choice or not -->
+        <% if(taskNumber>=3){ %> 
+
+        <!-- main card for ban -->
+        <div class="col-9 card mx-auto m-5">
+
+            <!-- card heading -->
+            <div class="card-header text-center text-white m-3 p-2 rounded bg-dark lead">
+                <i class="fa fa-trash"></i> Delete A Course
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-3">
+                        <i class="fa-10x text-danger fas fa-ban"></i>
+                    </div>
+
+                    <div class="col-9 my-auto">
+                        <div class="lead" style="font-size: 35px;">
+                            You Cannot Delete a Course Right Now!
+                            Since we are getting Choices from Students.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <% }else{ %>
+
+        <!-- main card for delete course -->
+        <div class="col-10 mainCard mx-auto card m-5">
+
+            <!-- including alert success if needed -->
+            <% if (typeof success!='undefined') { %>
+                <div class="mt-3">
+                    <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+                </div>
+            <% } %>
+
+            <!-- card heading -->
+            <div class="card-header mainHeader text-center text-white bg-dark rounded m-3 p-2 lead">
+                <i class="fa fa-trash"></i> Delete A Course
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST" enctype="application/x-www-form-urlencoded">
+
+                    <div class="form-row">
+
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="courseCode" id="courseCode" placeholder="Course Code">
+                        </div>
+
+                        <div class="col-2">
+                            <button type="submit" id="delete" class="btn btn-primary btn-block"><i class="fas fa-trash"></i> Delete</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <!-- course added in js -->
+        <div id="course"></div>
+        <% } %> 
+    </div> 
+
+    <!-- page specific js -->
+    <script src="js/deleteCourse.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

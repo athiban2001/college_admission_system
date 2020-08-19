@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Card for adding course to college -->
+            <div class="col-5 mx-auto mx-3 my-5 card">
+
+                <!-- including alert error if needed -->
+                <% if(typeof error!='undefined'){ %> 
+                    <div class="mt-3 mr-3 ml-3">
+                        <%- include('partials/alertError',{title:error.title,content:error.content}) %> 
+                    </div>
+                <% } %> 
+
+                <!-- including alert success if needed -->
+                <% if(typeof success!='undefined'){ %> 
+                    <div class="mt-3 mr-3 ml-3">
+                        <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+                    </div>
+                <% } %>
+
+                <!-- Card heading -->
+                <div class="card-header m-3 p-2 text-white text-center lead rounded bg-dark">
+                    <i class="fa fa-folder-plus"></i> Add Course To College
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/db/addCourseToCollege" method="post" enctype="application/x-www-form-urlencoded">
+
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="collegeList" class="lead">Select The College</label>
+                                <select class="form-control" name="collegecode" id="collegeList" required>
+                                    <option disabled selected>Select a College</option>
+                                    <!-- Select option values from college list property -->
+                                    <% for(college of collegeList){ %>
+                                        <option value="<%=college.collegecode %>"><%=college.collegename %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <!-- form row for courses select option (Added by js) -->
+                            <div class="col-12 form-group" id="courseList"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12 form-group">
+                                <label for="totalseats" class="lead">Total Seats</label>
+                                <input type="number" name="totalseats" id="totalSeats" placeholder="Total Seats" class="form-control">
+                                <div class="invalid-feedback">
+                                    Total Seats should be between 12 to 300
+                                </div>
+                                <div class="valid-feedback">
+                                    Valid Total Seats
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-4 mx-auto mt-3">
+                                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add Course</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Card for showing available courses -->
+            <div class="col-5 mx-auto my-5 card">
+
+                <!-- Table will be added by js -->
+                <div class="row" id="availableCourses"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page specific js -->
+    <script src="js/addCourseToCollege.js"></script>
+    
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

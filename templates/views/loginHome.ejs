@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link  rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/studentSidebar.css">
+</head>
+<body class="bg-light">
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including student navbar -->
+    <%- include('partials/studentSidebar',{title,imageName});  %>
+
+    <!-- including alert success if needed -->
+    <% if (success.title!=='') { %>
+        <div class="m-5 mt-5">
+            <%- include('partials/alertSuccess',{title:success.title,content:success.content})  %> 
+        </div>
+    <% } %>
+
+    <!-- check whether to show profile or not -->
+    <% if (showProfile===0) { %>
+
+        <div class="container">
+            <div class="row">
+
+                <!-- card for image upload -->
+                <div class="col-6 mt-5 mx-auto card">
+
+                    <!-- including alert error if necessary -->
+                    <% if (error.title!=='') { %>
+                        <div class="m-3">
+                            <%- include('partials/alertError',{title:error.title,content:error.content})  %> 
+                        </div>
+                    <% } %>
+
+                    <!-- card heading -->
+                    <div class="bg-dark text-white lead text-center p-2 m-3 rounded">
+                        Profile Picture
+                    </div>
+
+                    <br>
+
+                    <!-- form for uploading of image -->
+                    <form method="POST" action="/db/img" enctype="multipart/form-data">
+
+                        <div class="form-group">
+
+                            <br>
+
+                            <label for="exampleFormControlFile1" class="lead">Please Upload Your Image</label>
+
+                            <hr class="m-3">
+                            <input type="file" class="form-control-file" name="profileImage" id="image">
+                            <br>
+
+                            <button class="btn btn-block btn-primary p-2" type="submit">
+                                <i class="fa fa-upload fa-lg"></i> Upload
+                            </button>
+
+                        </div>
+
+                    </form>    
+
+                </div>
+            </div>
+        </div>
+
+        <!-- including footer -->
+        <div class="fixed-bottom">    
+            <%- include('partials/homeFooter');   %> 
+        </div>
+    <% } %>
+
+    <!-- check to show profile -->
+    <% if (showProfile===1) { %>
+
+        <div class="container">
+
+            <!-- check for allocation done or not -->
+            <%if(taskNumber!==5){%>
+                
+                <!-- including todolist if not done -->
+                <%- include('partials/toDoList',{taskNumber});  %> 
+
+            <% }else{ %>
+
+                <!-- check if rejected or accepted -->
+                <% if(!isAdmitted){ %> 
+                
+                <!-- card for application rejection -->
+                <div class="card m-5">
+
+                    <!-- card heading -->
+                    <div class="card-header text-white text-center m-3 p-2 bg-danger lead rounded">
+                        Application Rejected
+                    </div>
+
+                    <div class="lead card-body">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We are sorry the let you know that all your choices
+                         are rejected. You can retry on the next admission to try your best. 
+                        <div class="lead text-right my-4">
+                            Your Sincerely,<br>College Admission System.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- if student was admitted -->
+                <% }else{ %>
+
+                <!-- card for application approval -->
+                <div class="card m-5">
+
+                    <!-- card heading -->
+                    <div class="card-header text-white text-center m-3 p-2 bg-success lead rounded">
+                        Application Accepted
+                    </div>
+
+                    <div class="lead card-body">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Congratulations. You have been alloted the college <u><%=getAdmitted[0].collegename%></u>. And You have been
+                        alloted the course <u><%=getAdmitted[0].coursename %></u>. We are looking forward to you in the College. Thank You
+                        for using our service
+
+                        <div class="lead text-right my-4">
+                            Your Sincerely,<br>College Admission System.
+                        </div>
+
+                        <div class="text-center">
+
+                            <!-- download PDF button -->
+                            <a href="/getPDF" class="btn download btn-primary"><i class="fa fa-download"></i> Download Allotment Order</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>  
+            <% } %> 
+
+            <!-- profile card -->
+            <div class="card m-5">
+
+                <!-- card heading -->
+                <div class="card-header bg-dark text-white lead">
+                    Hello <%= student[0].fname+' '+student[0].lname %> ,
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <!-- image -->
+                        <div class="col-2 my-auto">
+                            <img src="uploads/<%=imageName %> " height="200px" width="150px" alt="profileImage" onerror="this.onerror=null;this.src='uploads/profiledefault.jpg';">
+                        </div>
+
+                        <!-- info I -->
+                        <div class="col-5">
+
+                            <div class="border-bottom p-2">
+                                <strong>Student ID</strong>
+                                <span class="float-right mr-2"><%= student[0].studentid %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>First Name</strong>
+                                <span class="float-right mr-2"><%= student[0].fname %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Last Name</strong>
+                                <span class="float-right mr-2"><%= student[0].lname %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Email ID</strong>
+                                <span class="float-right mr-2"><%= student[0].email %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Age</strong>
+                                <span class="float-right mr-2 d-inline-block text-truncate"><%= student[0].age %></span>
+                            </div>
+
+                        </div>
+                        
+                        <!-- info II -->
+                        <div class="col-5">
+
+                            <div class="border-bottom p-2">
+                                <strong>Address</strong>
+                                <span class="float-right mr-2"><%= student[0].address %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Gender</strong>
+                                <span class="float-right mr-2">
+                                    <% if (student[0].gender==='M') { %>
+                                        <%- 'Male' %> 
+                                    <% } else { %>
+                                        <%- 'Female' %>
+                                    <% } %>
+                                </span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Date Of Birth</strong>
+                                <span class="float-right mr-2"><%= student[0].dob.toISOString().substring(0,10) %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Phone Number</strong>
+                                <span class="float-right mr-2"><%= student[0].phone %></span>
+                            </div>
+
+                            <div class="border-bottom p-2">
+                                <strong>Nationality</strong>
+                                <span class="float-right mr-2 d-inline-block text-truncate"><%= student[0].nationality %></span>
+                            </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <% } %>
+
+        
+    <!-- page specific js -->
+    <script src="js/loginHome.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

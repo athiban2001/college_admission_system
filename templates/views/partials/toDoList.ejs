@@ -1,0 +1,40 @@
+<!-- To do list card -->
+<div class="card m-5">
+
+    <!-- Card header -->
+    <div class="card-header bg-dark text-white lead">
+        What You Need To Do Now?
+    </div>
+
+    <div class="card-body">
+
+        <!-- List of tasks -->
+        <ul class="list-group">
+
+            <!-- Enter marks task -->
+            <li class="list-group-item d-flex justify-content-between align-items-center <% if(taskNumber===1){%><%-'active'%><% }%>">
+                Enter Your Marks in Academics tab
+            </li>
+
+            <!-- Rank task -->
+            <li class="list-group-item d-flex justify-content-between align-items-center <% if(taskNumber===2){%><%-'active'%><% }%>">
+                Your Rank Will be determined. Please Wait
+            </li>
+
+            <!-- rank checking task -->
+            <li class="list-group-item d-flex justify-content-between align-items-center <% if(taskNumber===3){%><%-'active'%><% }%>">
+                Go to Rank Tab and Check Your Rank 
+            </li>
+
+            <!-- Choice entering task -->
+            <li class="list-group-item d-flex justify-content-between align-items-center <% if(taskNumber===4){%><%-'active'%><% }%>">
+                Enter Your Choices under Choices Tab
+            </li>
+
+            <!-- Allocation details task -->
+            <li class="list-group-item d-flex justify-content-between align-items-center <% if(taskNumber===5){%><%-'active'%><% }%>">
+                Get Your Allocation Details in Home Tab
+            </li>
+        </ul>
+    </div>
+</div>

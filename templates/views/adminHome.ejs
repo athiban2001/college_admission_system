@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+    
+    <div class="container">
+
+        <!-- main card for home page -->
+        <div class="card m-5">
+
+            <!-- including alert error if needed -->
+            <% if(typeof error!='undefined'){ %> 
+                <div class="m-2">
+                    <%- include('partials/alertError',{title:error.title,content:error.content}) %> 
+                </div>
+            <% } %> 
+
+            <!-- including alert success if needed -->
+            <% if(typeof success!='undefined'){ %> 
+                <div class="m-2">
+                    <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+                </div>
+            <% } %>
+
+            <!-- card heading -->
+            <div class="card-header rounded text-white text-center lead bg-dark m-3 p-2">
+                <i class="fa fa-tachometer-alt"></i> Dashboard
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <!-- Views -->
+                    <div class="col-3">
+                        <div class="card text-center p-2 m-1">
+                            <div class="card-header rounded bg-danger lead text-white m-2 p-2 text-center">
+                                <i class="fa fa-eye"></i> Views
+                            </div>
+                            <div class="card-body display-1">
+                                <%= viewsCount %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- students -->
+                    <div class="col-3">
+                        <div class="card text-center p-2 m-1">
+                            <div class="card-header lead rounded bg-primary text-white m-2 p-2 text-center">
+                                <i class="fa fa-users"></i> Students
+                            </div>
+                            <div class="card-body display-1">
+                                <%= studentsCount %> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colleges -->
+                    <div class="col-3">
+                        <div class="card text-center p-2 m-1">
+                            <div class="card-header rounded lead bg-success text-white m-2 p-2 text-center">
+                                <i class="fa fa-university"></i> Colleges
+                            </div>
+                            <div class="card-body display-1">
+                                <%= collegesCount %> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Courses -->
+                    <div class="col-3">
+                        <div class="card text-center p-2 m-1">
+                            <div class="card-header lead rounded bg-secondary text-white m-2 p-2 text-center">
+                                <i class="fa fa-graduation-cap"></i> Courses
+                            </div>
+                            <div class="card-body display-1">
+                                <%= coursesCount %> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Checking for allocation done or not -->
+            <% if(taskNumber<4){ %> 
+
+            <!-- card heading -->
+            <div class="card-header rounded text-white text-center lead bg-dark m-3 p-2">
+                <i class="fa fa-tasks"></i> Tasks To Do
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="m-3 lead">
+                                Set Ranks for Existing Students and close the Registration Process.
+
+                                <!-- form for updating showRank webdata -->
+                                <form action="/db/showRank" method="post" class="mt-3 lead" enctype="application/x-www-form-urlencoded">
+                                <button type="submit" name="showRank" value="showRank" class="btn btn-block btn-primary <% if(taskNumber!==1){ %><%-'disabled' %><% } %>" <% if(taskNumber!==1){ %><%-'disabled' %><% } %>><i class="fa fa-chart-line"></i> Set Ranks</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="m-3 lead">
+                                Make Students to add their Choices and store them in the Database.
+
+                                <!-- form for updating getChoices -->
+                                <form action="/db/getChoices" method="post" class="mt-3 lead" enctype="application/x-www-form-urlencoded">
+                                    <button type="submit" name="getChoices" value="getChoices" class="btn btn-block btn-primary <% if(taskNumber>2){ %><%-'disabled' %><% } %>" <% if(taskNumber>2){ %><%-'disabled' %><% } %>><i class="fa fa-server"></i> Get Choices</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="m-3 lead">
+                                Allocate Courses to Students based on theie Choices and their Rank.
+
+                                <!-- form for updating allocation webdata -->
+                                <form action="/db/allocation" method="post" class="mt-3 lead" enctype="application/x-www-form-urlencoded">
+                                    <button type="submit" name="allocation" value="allocation" class="btn btn-block btn-primary <% if(taskNumber===4){ %><%-'disabled' %><% } %>" <% if(taskNumber===4){ %><%-'disabled' %><% } %>><i class="fa fa-share"></i> Start Allocation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- if allocation is done -->
+            <% }else{ %>
+
+            <!-- Card heading -->
+            <div class="card-header rounded text-white text-center lead bg-dark m-3 p-2">
+                <i class="fa fa-users"></i> Alloted Student Details
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="m-3 lead">
+                                Show The list of Admitted Students with their allotment details.
+                                <div class="text-center">
+                                    <a href="/admitted" class="m-3 btn btn-outline-success">Show Admitted Students</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="m-3 lead">
+                                Show The list of Rejected Students along with their details.
+                                <div class="text-center">
+                                    <a href="/rejected" class="m-3 btn btn-outline-danger">Show Rejected Students</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Card heading -->
+            <div class="card-header rounded text-white text-center lead bg-dark m-3 p-2">
+                <i class="fa fa-database"></i> Reset All Data
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-4 mx-auto">
+                        <div class="card">
+                            <div class="m-3">
+                                <div class="lead text-center text-primary">Reset All the Data in the database</div>
+
+                                <!-- form for reset of database -->
+                                <form action="/db/reset" method="post" class="mt-3" enctype="application/x-www-form-urlencoded">
+
+                                    <div class="custom-control custom-checkbox my-4 text-center">
+                                        <input type="checkbox" class="custom-control-input" name="college" value="true" id="customControlInline">
+                                        <label class="custom-control-label" for="customControlInline">Reset Including College,Course Details</label>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-outline-primary">Reset</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <% } %> 
+        </div>
+    </div>
+    
+    <!-- Page specific js -->
+    <script src="js/adminHome.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

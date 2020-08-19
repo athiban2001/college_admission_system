@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- importing header file with home page -->
+
+    <%- include('partials/homeHeader',{title}); %> 
+
+    <!-- Creating home welcome message div jumbotron -->
+
+    <header class="jumbotron my-4 mx-4">
+        <h1 class="display-3">A Warm Welcome!</h1>
+        <p class="lead">An elegant website for admission of students to their colleges based on their rank. If you're a student Sign Up for an account and enter your details
+            so that we allocate the best college available to you.
+        </p>
+        <a href="/register" class="btn btn-primary btn-lg mt-2">Click to Register</a>
+        <br/>
+    </header>
+
+    <!-- Creating what we do div for further information -->
+
+    <div class="row mx-5">
+        <div class="col-md-8 mb-5 border">
+            <h2>What We Do</h2>
+            <hr>
+            <p>We contact all the colleges and get their details and we will post it on our website. Also we let students to choose their colleges based on their marks</p>
+            <p>All you need to do is to give your details and we will ensure best college seats for you. This site is based on Node JS and MySql backend and Bootstrap 
+                frontend.
+            </p>
+            <a class="btn btn-primary btn-lg mb-3" href="/register">Sign Up Today &raquo;</a>
+        </div>
+
+        <!-- Creating Contact Us div -->
+
+        <div class="col-md-4 mb-5 border">
+            <h2 class="text-center">Contact Us</h2>
+            <hr>
+            <address class="mt-3 lead">
+                CAS.com
+            <br>3481 Melrose Place
+            <br>Beverly Hills, IND 690-210
+            <br>
+            </address>
+            <address>
+                <abbr>Phone No:</abbr>
+                (123) 456-7890
+                <br>
+                <abbr>Email Id:</abbr>
+                <a href="mailto:#">cas@example.com</a>
+            </address>
+        </div>
+    </div>
+
+    <!-- including footer page -->
+
+    <%- include('partials/homeFooter');  %> 
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

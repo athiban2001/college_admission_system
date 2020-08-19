@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <link rel="stylesheet" href="css/roboto.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="bg-light">
+
+    <!-- importing header file with home page -->
+    <%- include('partials/homeHeader',{title}); %> 
+
+    <div class="container">
+        <div class="card m-5 col-6 mx-auto">
+            <div class="card-body">
+                
+                <!-- Importing error message if there is one -->
+                <% if(typeof error!='undefined'){ %>
+                    <%- include('partials/alertError',{title:error.title,content:error.content}); %>
+                <% } %> 
+                
+                <!-- Card header -->
+                <div class="bg-dark text-white text-center rounded p-2 lead">
+                    Login As Admin
+                </div>
+
+                <br>
+
+                <!-- form for admin login -->
+                <form action="/db/admin" method="post" enctype="application/x-www-form-urlencoded">
+
+                    <div class="form-row">
+                        <div class="col-12">
+                            <label for="inputEmail">&nbsp;Admin Name</label>
+                            <input required name="name" type="text" class="form-control" id="inputName" placeholder="Admin Name">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-row">
+                        <div class="col-12">
+                            <label for="inputPassword">&nbsp;Password</label>
+                            <input required name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="form-row">
+                        <button class="btn btn-block btn-primary p-2" type="submit">
+                            <i class="fa fa-sign-in fa-lg"></i> Login
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- including footer page -->
+    <%- include('partials/homeFooter');  %>
+    
+    <!-- Page Specific JavaScript -->
+    <script src="js/admin.js"></script>
+    
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

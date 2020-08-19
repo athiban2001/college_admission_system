@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+
+    <div class="container">
+
+        <!-- main card for college add -->
+        <div class="col-9 m-5 mx-auto card">
+
+            <!-- include error alert if available -->
+            <% if(typeof error!='undefined'){ %> 
+                <div class="mt-2">
+                    <%- include('partials/alertError',{title:error.title,content:error.content}) %> 
+                </div>
+            <% } %> 
+
+            <!-- including success alert if available -->
+            <% if(typeof success!='undefined'){ %> 
+                <div class="mt-2">
+                    <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+                </div>
+            <% } %> 
+
+            <!-- card heading -->
+            <div class="card-header text-white text-center lead rounded m-3 p-2 bg-dark">
+                <i class="fas fa-plus"></i> Add New College
+            </div>
+
+            <div class="card-body">
+
+                <!-- form for college addition -->
+                <form action="/db/addCollege" method="post" enctype="application/x-www-form-urlencoded">
+
+                    <div class="form-row">
+                        <label for="collegeName" class="lead">&nbsp;College Name</label>
+                        <input type="text" required name="collegename" id="collegeName" placeholder="College Name" class="form-control">
+                        <div class="invalid-feedback">
+                            College Name should be between 10 to 50 characters
+                        </div>
+                        <div class="valid-feedback">
+                            Valid College Name
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-3">
+                        <label for="collegeDean" class="lead">&nbsp;Dean Name</label>
+                        <input type="text" required name="collegedean" id="collegeDean" placeholder="Dean Name" class="form-control">
+                        <div class="invalid-feedback">
+                            Dean Name should be between 5 to 30 characters
+                        </div>
+                        <div class="valid-feedback">
+                            Valid Dean Name
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-3">
+                        <label for="collegeDean" class="lead">&nbsp;College Location</label>
+                        <input type="text" required name="collegecity" id="collegeCity" placeholder="City Name" class="form-control">
+                        <div class="invalid-feedback">
+                            Location should be between 5 to 50 characters
+                        </div>
+                        <div class="valid-feedback">
+                            Valid Location
+                        </div>
+                    </div>
+
+                    <div class="form-row m-4">
+                        <div class="col-2 mx-auto">
+                            <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Add College</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- page specific js -->
+    <script src="js/addCollege.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

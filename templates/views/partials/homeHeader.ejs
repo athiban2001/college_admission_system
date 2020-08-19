@@ -1,0 +1,49 @@
+<!-- Page Heading -->
+<h1 class="display-1 text-center bg-light p-2 mb-0">College Admission System</h1>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- Navbar container -->
+    <div class="container" style="font-size: large;">
+
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">Online College Admission System</a>
+
+      <!-- Collapse button for small screen -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsing menu -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+
+        <!-- List of navbar links -->
+        <ul class="navbar-nav ml-auto">
+
+          <!-- Home page link -->
+          <li class="nav-item   <% if(title==='home'){%><%-'active'%><% }%>">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+
+          <!-- Login page details -->
+          <li class="nav-item   <% if(title==='login'){%><%-'active'%><% }%>">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+
+          <!-- Register page details -->
+          <li class="nav-item   <% if(title==='register'){%><%-'active'%><% }%>">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+
+          <!-- Admin page details -->
+          <li class="nav-item   <% if(title==='admin'){%><%-'active'%><% }%>">
+            <a class="nav-link" href="/admin">Admin</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+    
+  </nav>

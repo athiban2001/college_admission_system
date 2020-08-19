@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="bg-light">
+
+    <!-- importing header file with home page -->
+
+    <%- include('partials/homeHeader',{title}); %> 
+
+    <!-- Card for the registration form -->
+    <div class="container">
+
+        <!-- checking for registration closing -->
+        <% if(taskNumber!==1){ %> 
+
+        <!-- card for registration close -->
+        <div class="col-9 card mx-auto m-5">
+
+            <!-- card heading -->
+            <div class="card-header text-center text-white m-3 p-2 rounded bg-dark lead">
+                <i class="fa fa-ban"></i> Registration Closed
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-3">
+                        <i class="fa-10x text-danger fas fa-ban"></i>
+                    </div>
+
+                    <div class="col-9 my-auto">
+                        <div class="lead my-auto">
+                            You Cannot Register right now. Please Wait until the allocation has been done and new admission takes place
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- if registration was not closed -->
+        <% }else{ %> 
+
+        <!-- main card for form -->
+        <div class="card m-5">
+
+            <div class="card-body">
+
+                <!-- Importing error message if there is one -->
+                <% if(error.title!==''){ %>
+                    <%- include('partials/alertError',{title:error.title,content:error.content}); %>
+                <% } %> 
+
+                <h2 class="card-title display-4 text-center">Register</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Fill in the form carefully</h6>
+                <br/>
+
+                <!-- Form starts here -->
+                <form action="/db/register" method="POST" enctype="application/x-www-form-urlencoded">
+
+                    <div class="bg-dark text-white text-center rounded p-2 lead">
+                        Personal Details I
+                    </div>
+
+                    <br>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="inputFirstName">&nbsp;First Name</label>
+                            <input required name="firstName" type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                            <div class="invalid-feedback">
+                                Firstname length should be between 5 to 40 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Firstname
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputLastName">&nbsp;Last Name</label>
+                            <input required name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                            <div class="invalid-feedback">
+                                Lastname length should be between 1 to 20 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Lastname
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-3">
+                            <label for="gender">&nbsp;Gender</label>
+                            <div class="custom-control custom-radio">
+                                <input required type="radio" class="custom-control-input" id="male" name="gender" value="M">
+                                <label class="custom-control-label" for="male">Male</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input required type="radio" class="custom-control-input" id="female" name="gender" value="F">
+                                <label class="custom-control-label" for="female">Female</label>
+                            </div>
+                        </div>
+
+                        <div class="col-9">
+                            <label for="inputAddress">&nbsp;Address</label>
+                            <textarea required name="address" class="form-control" id="inputAddress" placeholder="Address"></textarea>
+                            <div class="invalid-feedback">
+                                Address length should be between 10 to 50 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Address
+                            </div>
+                        </div>
+
+                    </div>
+
+                <hr class="my-4">
+
+                <div class="bg-dark text-white text-center rounded p-2 lead">
+                    Personal Details II
+                </div>
+
+                <br>
+
+                    <div class="form-row">
+
+                        <div class="col-6">
+                            <label for="inputFirstName">&nbsp;Phone Number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">+ 91</span>
+                                </div>
+                                <input required name="phone" type="number" class="form-control" id="inputPhone" placeholder="Phone Number">
+                                <div class="invalid-feedback">
+                                    Phone number should be 10 characters only
+                                </div>
+                                <div class="valid-feedback">
+                                    Valid Phone Number
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="inputEmail">&nbsp;Email</label>
+                            <input required name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            <div class="invalid-feedback">
+                                Not a Proper Email-ID
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Email-ID
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-row">
+
+                        <div class="col-4">
+                            <label for="inputAge">&nbsp;Age</label>
+                            <input required name="age" type="number" class="form-control" id="inputAge" placeholder="Age">
+                            <div class="invalid-feedback">
+                                Not a Proper Age
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Age
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="inputAge">&nbsp;Date of Birth</label>
+                            <input required name="dateOfBirth" type="date" class="form-control" id="inputDob" placeholder="dd/mm/yyyy">
+                        </div>
+
+                        <div class="col-4">
+                            <label for="inputNation">&nbsp;Nationality</label>
+                            <input required name="nationality" type="text" class="form-control" id="inputNation" placeholder="Nationality">
+                            <div class="invalid-feedback">
+                                Value should be between 4 to 30 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Country
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword">&nbsp;Password</label>
+                            <input required name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <div class="invalid-feedback">
+                                Password length should be between 8 to 20 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Password
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPasswordCon">&nbsp;Confirm Password</label>
+                            <input required name="confirmPassword" type="password" class="form-control" id="inputPasswordCon" placeholder="Confirm Password">
+                            <div class="invalid-feedback">
+                                Password does not match
+                            </div>
+                            <div class="valid-feedback">
+                                Matches Successfully
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <button class="btn btn-block btn-primary p-2" type="submit">
+                        <i class="fa fa-user-plus fa-lg"></i> Register
+                    </button>
+
+                    <br>
+
+                    <div class="text-center">
+                        <small>Already have an account, <a href="/login">Log in</a></small>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <% } %> 
+    </div>
+
+    <!-- including footer page -->
+    <%- include('partials/homeFooter');  %>
+    
+    <!-- Page Specific JavaScript -->
+    <script src="js/register.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

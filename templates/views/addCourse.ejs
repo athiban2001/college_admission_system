@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+    <div class="container">
+
+        <!-- main card course add -->
+        <div class="card col-9 mx-auto m-5">
+
+            <!-- add alert error if needed -->
+            <% if(typeof error!='undefined'){ %> 
+                <div class="m-3">
+                    <%- include('partials/alertError',{title:error.title,content:error.content}) %> 
+                </div>
+            <% } %> 
+
+            <!-- add alert success if needed -->
+            <% if(typeof success!='undefined'){ %> 
+                <div class="m-3">
+                    <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+                </div>
+            <% } %> 
+
+            <!-- Card heading -->
+            <div class="card-header text-center text-white bg-dark rounded lead m-3 p-2">
+                Add Courses
+            </div>
+
+            <div class="card-body">
+
+                <!-- form for course addition -->
+                <form action="/db/addCourse" method="post" enctype="application/x-www-form-urlencoded">
+
+                    <div class="form-row">
+
+                        <div class="col-8">
+                            <label for="courseName" class="lead">&nbsp;Course Name</label>
+                            <input type="text" required name="coursename" id="courseName" placeholder="Course Name" class="form-control">
+                            <div class="invalid-feedback">
+                                Course Name should be between 10 to 50 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Course Name
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="courseTag" class="lead">&nbsp;Course Tag</label>
+                            <input type="text" required name="coursetag" id="courseTag" placeholder="Course Tag" class="form-control">
+                            <div class="invalid-feedback">
+                                Course Tag should be between 2 to 3 characters
+                            </div>
+                            <div class="valid-feedback">
+                                Valid Course Tag
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row my-3">
+                        <label for="courseDescription" class="lead">&nbsp;Course Description</label>
+                        <input type="text" required name="coursedescription" id="courseDescription" placeholder="Course Description" class="form-control">
+                        <div class="invalid-feedback">
+                            Course Description should be between 20 to 70 characters
+                        </div>
+                        <div class="valid-feedback">
+                            Valid Course Description
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-5 mx-auto my-3">
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add Course</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Page specific js -->
+    <script src="js/addCourse.js"></script>
+    
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

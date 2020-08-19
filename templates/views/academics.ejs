@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- CSS stylesheets -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/studentSidebar.css">
+    <link rel="stylesheet" href="css/tox-progress.css">
+</head>
+
+<body>
+    <!-- Page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including navbar -->
+    <%-include('partials/studentSidebar',{title:'academics',imageName:imageName})%>
+
+    <div class="container">
+
+        <!-- Including alert success if exists -->
+        <% if (typeof success!='undefined') { %>
+            <div class="mt-3">
+                <%- include('partials/alertSuccess',{title:success.title,content:success.content}) %> 
+            </div>
+        <% } %>
+
+        <!-- Including alert error if exists -->
+        <% if (typeof error!='undefined') { %>
+            <div class="mt-3">
+                <%- include('partials/alertError',{title:error.title,content:error.content}) %> 
+            </div>
+        <% } %>
+
+        <% if (taskNumber===1) { %>
+
+            <!-- Main card for marks entry -->
+            <div class="card col-6 mx-auto my-5">
+
+                <!-- Alert warning for marks correction -->
+                <div class="alert alert-warning fade show mt-3" role="alert">
+                    <strong>Warning! </strong> | Once marks are uploaded they cannot be edited. Submit as quickly as possible
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Card heading -->
+                <div class="rounded m-2 p-2 text-center text-white bg-dark lead">
+                    Academics
+                </div>
+
+                <div class="card-body">
+
+                    <!-- Form for marks submission -->
+                    <form action="/db/academics" method="post" enctype="application/x-www-form-urlencoded">
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label for="inputFirstName" class="lead">&nbsp;Mathematics</label>
+                                <div class="input-group">
+                                    <input required name="maths" type="number" class="form-control" id="inputMaths" placeholder="Maths">
+                                    <div class="invalid-feedback">
+                                        Marks should be between 70 and 200
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Valid Marks
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label for="inputFirstName" class="lead">&nbsp;Physics</label>
+                                <div class="input-group">
+                                    <input required name="physics" type="number" class="form-control" id="inputPhysics" placeholder="Physics">
+                                    <div class="invalid-feedback">
+                                        Marks should be between 70 and 200
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Valid Marks
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label for="inputFirstName" class="lead">&nbsp;Chemistry</label>
+                                <div class="input-group">
+                                    <input required name="chemistry" type="number" class="form-control" id="inputChemistry" placeholder="Chemistry">
+                                    <div class="invalid-feedback">
+                                        Marks should be between 70 and 200
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Valid Marks
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Submit Marks
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        <% }else{ %>
+                <!-- Marks showing card -->
+                <div class="card m-5 col-9 mx-auto">
+
+                    <!-- Card heading -->
+                    <div class="bg-dark m-3 rounded text-center text-white p-2 lead">
+                        Your Marks
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- Progress bars for maths physics and chemistry -->
+                        <div class="row">
+                            <div class="col-4 tox-progress" data-size="180" data-thickness="12" data-color="#0275d8" data-background="#ffffff" data-progress="<%=(Math.round((marks[0].maths)/2)) %>" data-speed="500" id="progress-1">
+                                <div class="tox-progress-content" data-vcenter="true">
+                                    <p class="text-center lead" style="padding: 0 25px"><i class="fa fa-lg fa-calculator"></i> Mathematics <%=marks[0].maths %> </p>
+                                </div>
+                            </div>
+                            <div class="col-4 tox-progress" data-size="180" data-thickness="12" data-color="#ffc107" data-background="#ffffff" data-progress="<%=(Math.round((marks[0].physics)/2)) %>" data-speed="500" id="progress-1">
+                                <div class="tox-progress-content" data-vcenter="true">
+                                    <p class="text-center lead" style="padding: 0 25px"><i class="fa-align-center fa fa-lg fa-microscope"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=marks[0].physics %> </p>
+                                </div>
+                            </div>
+                            <div class="col-4 tox-progress" data-size="180" data-thickness="12" data-color="#dc3545" data-background="#ffffff" data-progress="<%=(Math.round((marks[0].chemistry)/2)) %>" data-speed="500" id="progress-1">
+                                <div class="tox-progress-content" data-vcenter="true">
+                                    <p class="text-center lead" style="padding: 0 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-lg fa-atom"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chemistry &nbsp;&nbsp;<%=marks[0].chemistry %>&nbsp;&nbsp; </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Cutoff heading -->
+                    <div class="rounded bg-dark m-3 p-2 lead text-white text-center">
+                        Your Cut Off Marks
+                    </div>
+
+                    <!-- Cutoff progress bar -->
+                    <div class="row p-2 m-3">
+                        <div class="col-4 mx-auto tox-progress" data-size="180" data-thickness="12" data-color="#28a745" data-background="#ffffff" data-progress="<%=(Math.round((marks[0].cutoff)/2)) %>" data-speed="500" id="progress-1">
+                            <div class="tox-progress-content" data-vcenter="true">
+                                <p class="text-center lead" style="padding: 0 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-lg fa-star"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cut-Off &nbsp;&nbsp;<%=marks[0].cutoff %>&nbsp;&nbsp; </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <% } %>
+    </div>
+    
+    <!-- Including footer -->
+    <div class="bg-dark">
+        <%- include('partials/homeFooter');  %>
+    </div>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- page specific js -->
+    <script src="js/tox-progress.js"></script>
+    <script src="js/academics.js"></script>
+</body>
+</html>

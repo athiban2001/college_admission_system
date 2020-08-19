@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- page heading -->
+    <h1 class="display-4 bg-light text-center p-2">College Admission System</h1>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <!-- table of student data -->
+                <table class="table table-striped table-bordered">
+
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <td scope="col"><%= student[0].fname %> </td>
+                        <th>Student ID</th>
+                        <td><%=student[0].studentid%></td>
+                        <td rowspan="4" class="text-center">
+                            <img src="/uploads/<%= student[0].studentid %>.jpg" class="text-center" id="profile" alt="profilePicture" height="200px" width="150px" onerror="this.onerror=null;this.src='uploads/profiledefault.jpg';">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Last Name</th>
+                        <td><%= student[0].lname %></td>
+                        <th>Rank</th>
+                        <td><%=rank%></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Phone No</th>
+                        <td><%= student[0].phone %></td>
+                        <th>Age</th>
+                        <td><%=student[0].age %></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td><%= student[0].email %></td>
+                        <th>Date Of Birth</th>
+                        <td><%=new Date(student[0].dob).toISOString().substring(0,10)%></td>
+                    </tr>
+
+                </table>  
+            </div>
+        </div>
+
+        <!-- academics data header -->
+        <div class="card-header text-dark text-center bg-dark rounded m-3 p-2 lead text-center">
+            <strong>Your Academics</strong>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <!-- table of student academics data -->
+                <table class="table table-bordered table-striped">
+
+                    <tr>
+                        <th>Maths</th>
+                        <td><%=academics[0].maths %></td>
+                        <th>Physics</th>
+                        <td><%=academics[0].physics%></td>
+                    </tr>
+
+                    <tr>
+                        <th>Chemistry</th>
+                        <td><%=academics[0].chemistry %></td>
+                        <th>Cut-Off</th>
+                        <td><%=academics[0].cutoff %></td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+        <!-- allotment order header -->
+        <div class="card-header text-dark text-center bg-dark rounded m-3 p-2 lead text-center">
+            <strong>Your Allotment Order</strong>
+        </div>
+
+        <!-- order para with allotment information -->
+        <div class="lead text-justify">
+            Respected <u><%=student[0].fname %> <%=student[0].lname %>,</u><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;You have been ranked <%=rank %> out of all Students . We reviewed Your Choices and the college that is alloted to you is 
+            <u><%= admitted[0].collegename %></u>. The course that is alloted to you is <u><%= admitted[0].coursename %></u>. I hope that you are happy with
+            the allocation. We seriously looking forward to you in the college. This is the Official Order of Allocation.
+        </div>
+
+        <!-- authentication -->
+        <div class="my-5 lead text-right">Yours sincerely,<br>College Admission System</div>
+
+    </div>
+</body>
+</html>

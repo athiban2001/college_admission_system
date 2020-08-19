@@ -1,0 +1,26 @@
+{
+  "name": "college_admission_system",
+  "version": "1.0.0",
+  "description": "An app to simulate college admission",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start":"node src/app.js"
+  },
+  "author": "Athiban T",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.0",
+    "puppeteer": "^3.0.2",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

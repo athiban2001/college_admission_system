@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+
+        /* CSS style for pagination buttons */
+        .pagination > li > a
+        {
+            background-color: white;
+            color: #dc3545;
+        }
+
+        .pagination > li > a:focus,
+        .pagination > li > a:hover,
+        .pagination > li > span:focus,
+        .pagination > li > span:hover
+        {
+            color: #5a5a5a;
+            background-color: #eee;
+            border-color: #ddd;
+        }
+
+        .pagination > .active > a
+        {
+            color: white;
+            background-color: #dc3545 !Important;
+            border: solid 1px #dc3545 !Important;
+        }
+
+        .pagination > .active > a:hover
+        {
+            background-color: #dc3545 !Important;
+            border: solid 1px #dc3545;
+        }
+        abbr{
+            color:#0275d8;    
+        }
+        abbr[title] {
+        border-bottom: none !important;
+        text-decoration: none !important;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including admin navbar -->
+    <%- include('partials/adminNavbar',{title:title}); %>
+
+    <div class="container">
+
+        <!-- main card for courses data -->
+        <div class="m-5 card">
+
+            <!-- card heading -->
+            <div class="text-center text-white lead rounded bg-dark m-3 p-2">
+                <i class="fa fa-folder"></i> All Courses
+            </div>
+
+            <div class="card-body m-2 p-2">
+
+                <!-- table for course data -->
+                <table class="table table-bordered table-striped">
+
+                    <!-- table heading for courses -->
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="width: 10%">Course Code</th>
+                            <th style="width: 25%">Course Name</th>
+                            <th style="width: 5%">Course Tag</th>
+                            <th style="width: 20%">Course Description</th>
+                            <th style="width: 40%">Course Available Colleges</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- adding course data to table cell from courses -->
+                        <% if(typeof courses !='undefined'){ %>
+                        <% for(let course of courses){ %>
+                            <tr>
+                                <td><%= course.coursecode %> </td>
+                                <td><%= course.coursename %> </td>
+                                <td><%= course.coursetag %> </td>
+                                <td class="text-truncate"><%= course.coursedescription %> </td>
+
+                                <!-- college details for courses cell with truncate -->
+                                <% if(course.colleges.length===0){ %>
+                                    <td class="text-truncate">There are no courses available</td>
+                                <% }else{ %> 
+                                    <td class="text-truncate">
+                                    <% for(let college of course.colleges){ %>
+                                    <abbr title="<%=college.collegename %>"><%= college.collegecode %></abbr>,
+                                    <% } %>
+                                    </td>
+                                <% } %>
+
+                            </tr>
+                        <% } %>
+                        <% } %> 
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- pagination buttons -->
+            <div class="m-2">
+
+                <!-- pagination navbar -->
+                <nav aria-label="Page navigation example">
+
+                    <!-- navbar pagination list -->
+                    <ul class="pagination justify-content-center">
+
+                        <!-- list button left button -->
+                        <li class="page-item <% if(page-1==0){  %><%-'disabled' %> <% } %>  ">
+                            <a class="page-link" href="?page=<%= page-1 %> " aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <!-- adding pages button -->
+                        <% for(let i=1;i<=totalPages;i++){ %> 
+                                <% if (page===i) { %>
+                                    <li class="page-item active"><a class="page-link" href="?page=<%= i %>"><%= i %> </a></li>
+                                <% }else{ %>
+                                    <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%= i %> </a></li>
+                                <% } %> 
+                        <% } %>
+
+                        <!-- list type right button -->
+                        <li class="page-item <% if(page+1>totalPages){  %><%-'disabled' %> <% } %>">
+                            <a class="page-link" href="?page=<%= page+1 %> " aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

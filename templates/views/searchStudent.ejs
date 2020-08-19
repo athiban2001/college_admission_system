@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <style>
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <div class="d-flex flex-column justify-content-between">
+
+        <!-- page heading -->
+        <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+        <!-- including admin navbar -->
+        <%- include('partials/adminNavbar',{title:title}); %>
+
+
+        <div class="container" id="searchContainer">
+
+            <!-- main card for search student -->
+            <div class="card mainCard col-8 mx-auto m-5">
+
+                <!-- card heading -->
+                <div class="card-header mainHeader text-white lead text-center bg-dark rounded m-3 p-2">
+                    <i class="fas fa-search"></i> Search For a particular Student
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row m-3">
+                        <label for="courseName" class="lead">&nbsp;Type The Student's First Name</label>
+                        <input type="text" name="student" class="form-control" placeholder="Student Firstname" id="student">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!-- profiles will be inserted using js -->
+                <div class="col-12" id="profiles"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- page specific js -->
+    <script src="js/searchStudent.js"></script>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

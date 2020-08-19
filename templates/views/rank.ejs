@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission System</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="css/roboto.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/studentSidebar.css">
+</head>
+<body class="bg-light">
+
+    <!-- page heading -->
+    <h1 class="display-3 text-center bg-light p-2 mb-0">College Admission System</h1>
+
+    <!-- including student navbar -->
+    <%-include('partials/studentSidebar',{title:'rank',imageName:imageName});%>
+
+    <!-- checking for showRank webdata -->
+    <% if(taskNumber<=2){ %>
+
+    <div class="container">
+
+        <!-- card for please wait  -->
+        <div class="card col-7 mx-auto m-5">
+
+            <!-- card heading -->
+            <div class="card-title bg-dark rounded text-white text-center m-3 p-2 lead">
+                Your Rank is Yet To Be Declared
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-3">
+                        <i class="fa fa-9x text-secondary fa-cog fa-spin"></i>
+                    </div>
+
+                    <div class="col-9 my-auto">
+                        <p class="lead">Your Rank Will Be declared Soon. Please View Home Page For Further Details</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- including footer -->
+    <div class="bg-dark fixed-bottom">
+        <%- include('partials/homeFooter'); %> 
+    </div>
+
+    <!-- for showing rank -->
+    <% }else{ %>
+
+    <div class="container">
+
+        <!-- card for rank data -->
+        <div class="card col-9 m-5 mx-auto">
+
+            <!-- rank header -->
+            <div class="card-header text-center text-white bg-dark rounded m-3 p-2 lead">
+                <i class="fa fa-chart-line"></i> Your Rank
+            </div>
+
+            <div class="card-body">
+
+                <div class="p-3">
+
+                    <!-- progress bar for rank -->
+                    <div class="text-center lead display-4">Your Rank is <%=rank %> out of <%=count %></div>
+
+                    <div class="progress m-2">
+                        <div class="progress-bar  progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width:<%= Math.round((rank/count)*100) %>%" aria-valuenow="<%= Math.round((rank/count)*100) %>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <!-- marks header -->
+                    <div class="col-12">
+                        <div class="bg-danger rounded m-1 mt-3 p-2 text-white text-center lead">Your Marks</div>
+                    </div>
+
+                </div>
+
+                <!-- marks data -->
+                <div class="row mt-3">
+
+                    <div class="col-6">
+
+                        <div class="border-bottom p-2">
+                            <strong>Mathematics</strong>
+                            <span class="float-right mr-2"><%= marks[0].maths %></span>
+                        </div>
+
+                        <div class="border-bottom p-2">
+                            <strong>Physics</strong>
+                            <span class="float-right mr-2"><%= marks[0].physics %></span>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+
+                        <div class="border-bottom p-2">
+                            <strong>Chemistry</strong>
+                            <span class="float-right mr-2"><%= marks[0].chemistry %></span>
+                        </div>
+
+                        <div class="border-bottom p-2">
+                            <strong>Cut Off</strong>
+                            <span class="float-right mr-2"><%= marks[0].cutoff %></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <% } %>
+
+    <!-- libraries for bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
